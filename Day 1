@@ -1,0 +1,49 @@
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,3]
+Output: 3
+Example 2:
+
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+ 
+
+Constraints:
+n == nums.length
+1 <= n <= 5 * 104
+-109 <= nums[i] <= 109
+
+
+
+
+
+
+def find_majority(nums):
+    # Initialize majority candidate and count
+    majority_candidate = None
+    count = 0
+
+    # Iterate through numbers to find majority candidate
+    for num in nums:
+        if count == 0:
+            # Set new majority candidate
+            majority_candidate = num
+            count = 1
+        elif majority_candidate == num:
+            # Increment count if match
+            count += 1
+        else:
+            # Decrement count if mismatch
+            count -= 1  # Changed from count = 1 to count -= 1
+
+    # Return majority candidate
+    return majority_candidate
+
+
+
