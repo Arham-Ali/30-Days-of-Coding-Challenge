@@ -1,0 +1,30 @@
+Given an integer array nums, return the number of reverse pairs in the array.
+
+A reverse pair is a pair (i, j) where:
+
+0 <= i < j < nums.length and
+nums[i] > 2 * nums[j].
+
+
+class Solution:
+    def reversePairs(self, nums: List[int]) -> int:
+        res = 0
+        bit = [0] * (len(nums) + 1)
+        
+        def update(x):
+            while x < len(bit):
+                bit[x] += 1
+                x += x & -x
+        
+        def query(x):
+            sum = 0
+            while x:
+                sum += bit[x]
+                x -= x & -x
+            return sum
+        
+        for num in sorted(nums):
+            res += query(len(nums) + 1) - query(int(2 * num) + 1)
+            update(int(2 * num) + 1)
+        
+        return res
